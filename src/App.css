@@ -1,0 +1,11 @@
+.fixed__fileMedia{
+    padding: 1%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    background-color: #303030;
+    color:whitesmoke;
+    
+}

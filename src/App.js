@@ -1,13 +1,15 @@
 import React , { useState, useEffect}  from "react";
 import db from './Firebase';
-import { collection, query, onSnapshot, serverTimestamp, addDoc  } from "firebase/firestore";
+import { collection, query, onSnapshot, serverTimestamp, addDoc, orderBy  } from "firebase/firestore";
 import { Upload } from "upload-js";
+import './App.css';
 
 function App(){
     const [chats, updateChats] = useState([]);
     const [admin, updateAdmin] = useState("");
     const [input,updateInput] = useState("");
     const upload = new Upload({ apiKey: "free" })
+    const [fileuploadprogress, updateFileuploadProgress] = useState(0);
 
     //Initializing Admin Name at the Start of Application through prompt
     useEffect(()=>{
@@ -16,12 +18,13 @@ function App(){
 
     //Fetching Realtime data from collection messages hosted at Firebase Firestore
         useEffect(()=>{
-            const q = query(collection(db, "messages"));
+            const q = query(collection(db, "messages"), orderBy("timestamp", "desc"));
             onSnapshot(q, (querySnapshot) => {
+                let temp = [];
                 querySnapshot.forEach((doc) => {
-                    let temp = chats;
                     temp.push(doc.data())
                     updateChats(temp)
+                    updateChats(temp);
                 });
             });
         },[])
@@ -73,11 +76,14 @@ function App(){
         }
     }
 
-     //Uploading Local Selected File to Upload.io Free Server  (Using upload-js), Limit : 5 MB
+    //  Uploading Local Selected File to Upload.io Free Server  (Using upload-js)
+    //  File Size Limit : 5 MB,  File Host Limit : 4 Hrs
     async function onFileSelected(event) {
         const [ file ]    = event.target.files;
-        const { fileUrl } = await upload.uploadFile({file});
-        console.log(`File uploaded! ${fileUrl}`);
+        const { fileUrl } = await upload.uploadFile({
+            file,
+            onProgress: ({ progress }) => updateFileuploadProgress(progress)
+        });
         sendMediaInfo(fileUrl);
       }
 
@@ -107,8 +113,13 @@ function App(){
                 )
             }
 
-            <br/><h2>Select File to Upload</h2>
-            <input type="file" onChange={onFileSelected} />
+            <div className="fixed__fileMedia">
+                <input type="file" onChange={onFileSelected} />
+                {
+                    (fileuploadprogress>0 && fileuploadprogress !== 100) ?
+                    <p>{fileuploadprogress}% Uploaded</p> : null
+                 }
+            </div>
         </>
 
     );
