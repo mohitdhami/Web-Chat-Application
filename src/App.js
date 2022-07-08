@@ -60,6 +60,14 @@ function App(){
       //Appending New Media Messages to List chats via updateChats and fileUrl
     const sendMediaInfo = (fileUrl) =>{
         if(fileUrl){
+            
+            //Extracting File-Format(Extension) of File to be Uploaded from filePath String 
+            var fileInput = document.getElementById('upload-File');
+            var filePath = fileInput.value;
+            var re = /(?:\.([^.]+))?$/;
+            var ext = re.exec(filePath)[1];
+            ext = ext.toLowerCase(); 
+
             //Local Updating chat to chats State
             updateChats([...chats, {username: admin,text: fileUrl }]);
 
@@ -69,7 +77,8 @@ function App(){
                     text: fileUrl,
                     username: admin,
                     timestamp: serverTimestamp(),
-                    caption: "File"
+                    caption: "File",
+                    extension: ext,
                   });
             }
             updateFFDatabase();
@@ -91,7 +100,7 @@ function App(){
     function isValidURL(str) {
         var regex = /(?:https?):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
         return (regex .test(str)) ? true : false;
-        }
+    }
 
     return (
         <>
@@ -114,7 +123,7 @@ function App(){
             }
 
             <div className="fixed__fileMedia">
-                <input type="file" onChange={onFileSelected} />
+                <input type="file" id="upload-File" onChange={onFileSelected} />
                 {
                     (fileuploadprogress>0 && fileuploadprogress !== 100) ?
                     <p>{fileuploadprogress}% Uploaded</p> : null
