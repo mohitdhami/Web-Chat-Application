@@ -99,7 +99,25 @@ function App(){
     //Checks if a string is a Link or Not
     function isValidURL(str) {
         var regex = /(?:https?):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
-        return (regex .test(str)) ? true : false;
+        return (regex.test(str)) ? true : false;
+    }
+
+    //Cheching Whether The Provided File Extensions is Image or not
+    function isImageExtension(ext){
+        const imageExtensions = ["jpg","png","jpeg"];
+        for(let ie of imageExtensions)
+            if(ie === ext)
+                return true;
+    }
+
+    function messageMedia(data){
+        console.log("image status:"+ isImageExtension(data.extension));
+        if(isImageExtension(data.extension) === true)
+            return <img src={data.text} width="100" alt="Image"/>;
+        else if(isValidURL(data.text) === true)
+            return data.caption; 
+        else 
+            return data.text;
     }
 
     return (
@@ -114,10 +132,11 @@ function App(){
             { //Embedding JSX by map() Function  Inside JSX Code Block
                 chats.map(
                     (data) =>{
-                        return <p key={data.timestamp}>{data.username} : 
-                        {isValidURL(data.text)?
-                         (data.caption +" : "+ data.text) : 
-                        data.text}</p>
+                        return (
+                            <p key={data.timestamp}>
+                            {data.username + " : "}{messageMedia(data)}
+                            </p> 
+                        );      
                     } 
                 )
             }
