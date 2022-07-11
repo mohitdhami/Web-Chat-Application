@@ -1,11 +1,35 @@
-.fixed__fileMedia{
-    padding: 1%;
-    display: flex;
-    justify-content: center;
+.chat-box{
+    padding-bottom: 1%;
+    display: flex; 
+    justify-content: center; 
     align-items: center;
     position: fixed;
     bottom: 0;
     background-color: #303030;
     color:whitesmoke;
+    width: 100%;
+}
+
+body{
+    margin:0;
+    padding: 0;
+    background-color: #303030;
+    color: whitesmoke
+}
+
+.header{
+    background-color: #377D71;
+    color: #d8efe7;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    margin-top: 0;
+    width: 100%;
     
+}
+
+.chats__section{
+    width: 100%;
+    display: grid;
+    justify-content: center;
 }

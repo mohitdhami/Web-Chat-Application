@@ -1,4 +1,4 @@
-import React , { useState, useEffect}  from "react";
+import React , { useState, useEffect, useRef}  from "react";
 import db from './Firebase';
 import { collection, query, onSnapshot, serverTimestamp, addDoc, orderBy  } from "firebase/firestore";
 import { Upload } from "upload-js";
@@ -13,12 +13,22 @@ function App(){
 
     //Initializing Admin Name at the Start of Application through prompt
     useEffect(()=>{
-        updateAdmin(prompt("What is Your Name ?"))
+        let username = prompt("What is Your Name ?");
+
+        // Capitalizing Username
+        username = username.toLowerCase();
+        username = username.charAt(0).toUpperCase() + username.slice(1);
+        for(let i=1;i<username.length;i++){
+            if(username.charAt(i-1) === " ")
+                username = username.slice(0,i) + username.charAt(i).toUpperCase() + username.slice(i+1);
+        }
+
+        updateAdmin(username);
     },[]);
 
     //Fetching Realtime data from collection messages hosted at Firebase Firestore
         useEffect(()=>{
-            const q = query(collection(db, "messages"), orderBy("timestamp", "desc"));
+            const q = query(collection(db, "messages"), orderBy("timestamp", "asc"));
             onSnapshot(q, (querySnapshot) => {
                 let temp = [];
                 querySnapshot.forEach((doc) => {
@@ -56,6 +66,12 @@ function App(){
     const updateInputField = e => {
         updateInput(e.target.value);
      }
+
+    //Scrollbar Automatically Scroll Down as New Elements add To chats
+    const messagesEndRef = useRef(null)
+    useEffect(()=>{
+        messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
+    }, [chats]);
 
       //Appending New Media Messages to List chats via updateChats and fileUrl
     const sendMediaInfo = (fileUrl) =>{
@@ -104,7 +120,7 @@ function App(){
 
     //Cheching Whether The Provided File Extensions is Image or not
     function isImageExtension(ext){
-        const imageExtensions = ["jpg","png","jpeg"];
+        const imageExtensions = ["jpg","png","jpeg","gif"];
         for(let ie of imageExtensions)
             if(ie === ext)
                 return true;
@@ -113,22 +129,21 @@ function App(){
     function messageMedia(data){
         console.log("image status:"+ isImageExtension(data.extension));
         if(isImageExtension(data.extension) === true)
-            return <img src={data.text} width="100" alt="Image"/>;
+            return <img src={data.text} width="100"/>;
         else if(isValidURL(data.text) === true)
-            return data.caption; 
+            return <button><a href={data.text} target="_black" download>Download File</a></button>;
         else 
             return data.text;
     }
 
     return (
         <>
-            <h1>Hello {admin}</h1>
-            <form>
-                <label>Enter Message </label><br/>
-                <input type="text"  onChange={updateInputField}/>
-                <button type='submit' onClick={sendMessage}>Send Message</button>
-            </form>
-         
+            <div class="header">
+                <h1>Hello {admin}</h1>
+            </div>
+
+            <div class="chats__section">
+                <br/><br/><br/><br/><br/><br/><br/><br/>
             { //Embedding JSX by map() Function  Inside JSX Code Block
                 chats.map(
                     (data) =>{
@@ -140,14 +155,25 @@ function App(){
                     } 
                 )
             }
+            <br/><br/><br/><br/>
 
-            <div className="fixed__fileMedia">
+            {/*Below Statement is Important to Track New Elements Added to Current Div*/}
+            <div ref={messagesEndRef} />
+            </div>
+            
+            <div class="chat-box">
+                <form>
+                    <label>Enter Message </label><br/>
+                    <input type="text"  onChange={updateInputField}/>
+                    <button type='submit' onClick={sendMessage}>Send Message</button>
+                </form>
                 <input type="file" id="upload-File" onChange={onFileSelected} />
                 {
                     (fileuploadprogress>0 && fileuploadprogress !== 100) ?
                     <p>{fileuploadprogress}% Uploaded</p> : null
                  }
             </div>
+
         </>
 
     );
