@@ -126,10 +126,10 @@ function App(){
                 return true;
     }
 
+    //Function to Check Type of Media in text and Return Suitable Media( Image,Files and Chat Texts)
     function messageMedia(data){
-        console.log("image status:"+ isImageExtension(data.extension));
         if(isImageExtension(data.extension) === true)
-            return <img src={data.text} width="100"/>;
+            return <img class="magnify" src={data.text} width="100" alt="Loading .."/>;
         else if(isValidURL(data.text) === true)
             return <button><a href={data.text} target="_black" download>Download File</a></button>;
         else 
@@ -138,6 +138,7 @@ function App(){
 
     return (
         <>
+        
             <div class="header">
                 <h1>Hello {admin}</h1>
             </div>
@@ -155,8 +156,6 @@ function App(){
                     } 
                 )
             }
-            <br/><br/><br/><br/>
-
             {/*Below Statement is Important to Track New Elements Added to Current Div*/}
             <div ref={messagesEndRef} />
             </div>

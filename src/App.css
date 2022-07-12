@@ -14,7 +14,8 @@ body{
     margin:0;
     padding: 0;
     background-color: #303030;
-    color: whitesmoke
+    color: whitesmoke;
+    font-family: Georgia, Times, 'Times New Roman', serif;
 }
 
 .header{
@@ -25,11 +26,18 @@ body{
     position: fixed;
     margin-top: 0;
     width: 100%;
-    
 }
 
 .chats__section{
     width: 100%;
     display: grid;
     justify-content: center;
+    margin-bottom: 15vh;
 }
+
+img.magnify:hover,
+    img.magnify:focus 
+    {
+        transition: .2s;
+        transform: scale(2.0);
+    }
