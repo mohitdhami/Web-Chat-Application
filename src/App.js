@@ -65,7 +65,7 @@ function App(){
     //Keep Updating input via updateInput on Every change Occur in InputField
     const updateInputField = e => {
         updateInput(e.target.value);
-     }
+    }
 
     //Scrollbar Automatically Scroll Down as New Elements add To chats
     const messagesEndRef = useRef(null)
@@ -110,7 +110,7 @@ function App(){
             onProgress: ({ progress }) => updateFileuploadProgress(progress)
         });
         sendMediaInfo(fileUrl);
-      }
+    }
 
     //Checks if a string is a Link or Not
     function isValidURL(str) {
@@ -125,11 +125,20 @@ function App(){
             if(ie === ext)
                 return true;
     }
+    //Checking Whether The Provide File Extension is Audio or not
+    function isSoundExtension(ext){
+        const soundExtensions = ["mp3","ogg","amr","mpeg","wav"];
+        for(let se of soundExtensions)
+            if(se === ext)
+                return true; 
+        }
 
     //Function to Check Type of Media in text and Return Suitable Media( Image,Files and Chat Texts)
     function messageMedia(data){
         if(isImageExtension(data.extension) === true)
-            return <img class="magnify" src={data.text} width="100" alt="Loading .."/>;
+            return <img className="magnify" src={data.text} width="100" alt="Loading .."/>;
+        else if(isSoundExtension(data.extension) === true )
+            return <audio controls><source src={data.text} type={("audio/"+data.extension)}/></audio>
         else if(isValidURL(data.text) === true)
             return <button><a href={data.text} target="_black" download>Download File</a></button>;
         else 
@@ -138,14 +147,13 @@ function App(){
 
     return (
         <>
-        
-            <div class="header">
+            <div className="header">
                 <h1>Hello {admin}</h1>
             </div>
 
-            <div class="chats__section">
+            <div className="chats__section">
                 <br/><br/><br/><br/><br/><br/><br/><br/>
-            { //Embedding JSX by map() Function  Inside JSX Code Block
+            { //Embedding JSX by map() Function  Inside JSX Code Block 
                 chats.map(
                     (data) =>{
                         return (
@@ -160,7 +168,7 @@ function App(){
             <div ref={messagesEndRef} />
             </div>
             
-            <div class="chat-box">
+            <div className="chat-box">
                 <form>
                     <label>Enter Message </label><br/>
                     <input type="text"  onChange={updateInputField}/>
@@ -168,14 +176,12 @@ function App(){
                 </form>
                 <input type="file" id="upload-File" onChange={onFileSelected} />
                 {
-                    (fileuploadprogress>0 && fileuploadprogress !== 100) ?
-                    <p>{fileuploadprogress}% Uploaded</p> : null
-                 }
+                    (fileuploadprogress > 0 && fileuploadprogress !== 100) ?
+                    <p>{fileuploadprogress} % Uploaded</p> : null
+                }
             </div>
 
         </>
-
     );
 }
-
 export  default App;
