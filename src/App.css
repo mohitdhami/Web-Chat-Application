@@ -1,8 +1,7 @@
 .chat-box{
     padding-bottom: 1%;
-    display: flex; 
+    display: grid; 
     justify-content: center; 
-    align-items: center;
     position: fixed;
     bottom: 0;
     background-color: #303030;
@@ -26,6 +25,8 @@ body{
     position: fixed;
     margin-top: 0;
     width: 100%;
+    box-shadow: 5px 1px;
+    z-index: 2;
 }
 
 .chats__section{
@@ -41,3 +42,7 @@ img.magnify:hover,
         transition: .2s;
         transform: scale(2.0);
     }
+
+.audio__z-index{
+    z-index: 0;
+}

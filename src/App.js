@@ -138,7 +138,7 @@ function App(){
         if(isImageExtension(data.extension) === true)
             return <img className="magnify" src={data.text} width="100" alt="Loading .."/>;
         else if(isSoundExtension(data.extension) === true )
-            return <audio controls><source src={data.text} type={("audio/"+data.extension)}/></audio>
+            return <audio className="audio__z-index" controls><source src={data.text} type={("audio/"+data.extension)}/></audio>
         else if(isValidURL(data.text) === true)
             return <button><a href={data.text} target="_black" download>Download File</a></button>;
         else 
