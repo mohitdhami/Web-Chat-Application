@@ -4,8 +4,7 @@ import { collection, query, onSnapshot, serverTimestamp, addDoc, orderBy  } from
 import { Upload } from "upload-js";
 import './App.css';
 import BasicCard from './mui components/BasicCard';
-import BasicButtons from './mui components/BasicButtons';
-// import ComposedTextField from "./mui components/ComposedTextField";
+import Stack from '@mui/material/Stack';
 
 function App(){
     const [chats, updateChats] = useState([]);
@@ -80,9 +79,13 @@ function App(){
     const sendMediaInfo = (fileUrl) =>{
         if(fileUrl){
             
-            //Extracting File-Format(Extension) of File to be Uploaded from filePath String 
+            //Extracting File Name + File-Format(Extension) of File to be Uploaded from filePath String 
             var fileInput = document.getElementById('upload-File');
             var filePath = fileInput.value;
+            //Extracting Name of File 
+            var filename = filePath.replace(/^.*[\\\/]/, '')
+            
+            //Extracting File Extension
             var re = /(?:\.([^.]+))?$/;
             var ext = re.exec(filePath)[1];
             ext = ext.toLowerCase(); 
@@ -96,7 +99,7 @@ function App(){
                     text: fileUrl,
                     username: admin,
                     timestamp: serverTimestamp(),
-                    caption: "File",
+                    caption: filename,
                     extension: ext,
                   });
             }
@@ -140,10 +143,15 @@ function App(){
     function messageMedia(data){
         if(isImageExtension(data.extension) === true)
             return <img className="magnify" src={data.text} width="100" alt="Loading .."/>;
-        else if(isSoundExtension(data.extension) === true )
-            return <audio className="audio__z-index" controls><source src={data.text} type={("audio/"+data.extension)}/></audio>
-        else if(isValidURL(data.text) === true)
-            return <button><a href={data.text} target="_black" download>Download File</a></button>;
+        else if(isSoundExtension(data.extension) === true ){
+            return <p>
+                {"Audio : "+data.caption} <br/>
+                <audio className="audio__z-index" controls>
+                <source src={data.text} type={("audio/"+data.extension)}/>{data.caption}
+                </audio></p>
+        }
+        else if(isValidURL(data.text) === true && data.caption !== undefined)
+            return <p><a href={data.text} target="_black" download>[ Open File ]</a>{" - "+data.caption}</p>;
         else 
             return data.text;
     }
@@ -173,17 +181,18 @@ function App(){
             
             <div className="chat-box">
                 <form>
-                    <label>Enter Message </label><br/>
+                    <label>Enter Message</label><br/>
+                    <Stack direction="row" spacing={1}>
                     <input type="text"  onChange={updateInputField}/>
-                    {/* <ComposedTextField/> */}
-                    <button type='submit' onClick={sendMessage}>Send Message</button>
-                    {/* <BasicButtons text="Send Message"/> */}
+                    
+                    <button type='submit' onClick={sendMessage}>Send</button>
+                    <input type="file" id="upload-File" onChange={onFileSelected} />
+                    {
+                        (fileuploadprogress > 0 && fileuploadprogress !== 100) ?
+                        <p>Uploading ..</p>: null
+                    } 
+                    </Stack>      
                 </form>
-                <input type="file" id="upload-File" onChange={onFileSelected} />
-                {
-                    (fileuploadprogress > 0 && fileuploadprogress !== 100) ?
-                    <p>{fileuploadprogress} % Uploaded</p> : null
-                }
             </div>
 
         </>

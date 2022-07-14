@@ -1,3 +1,14 @@
+:root {
+    --chatBox-width: 50%; 
+}
+
+@media only screen and (max-width: 1000px) {
+    :root {
+        --chatBox-width: 95%;
+    }
+}
+
+
 .chat-box{
     padding-bottom: 1%;
     display: flex; 
@@ -5,9 +16,13 @@
     justify-content: center;
     position: fixed;
     bottom: 0;
-    background-color: #303030;
-    color:whitesmoke;
-    width: 100%;
+    background-color: rgb(244, 237, 237);
+    color: black;
+    width: var(--chatBox-width);
+    margin-left: calc((100% - var(--chatBox-width))/2);
+    margin-bottom: 1%;
+    border-radius: 10px;
+    font-size: 14px;
 }
 
 body{
