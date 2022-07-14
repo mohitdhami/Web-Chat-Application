@@ -1,7 +1,8 @@
 .chat-box{
     padding-bottom: 1%;
-    display: grid; 
-    justify-content: center; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
     position: fixed;
     bottom: 0;
     background-color: #303030;
@@ -14,7 +15,7 @@ body{
     padding: 0;
     background-color: #303030;
     color: whitesmoke;
-    font-family: Georgia, Times, 'Times New Roman', serif;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .header{

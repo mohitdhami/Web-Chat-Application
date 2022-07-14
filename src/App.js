@@ -3,6 +3,9 @@ import db from './Firebase';
 import { collection, query, onSnapshot, serverTimestamp, addDoc, orderBy  } from "firebase/firestore";
 import { Upload } from "upload-js";
 import './App.css';
+import BasicCard from './mui components/BasicCard';
+import BasicButtons from './mui components/BasicButtons';
+// import ComposedTextField from "./mui components/ComposedTextField";
 
 function App(){
     const [chats, updateChats] = useState([]);
@@ -152,13 +155,13 @@ function App(){
             </div>
 
             <div className="chats__section">
-                <br/><br/><br/><br/><br/><br/><br/><br/>
+                <br/><br/><br/><br/><br/>
             { //Embedding JSX by map() Function  Inside JSX Code Block 
                 chats.map(
                     (data) =>{
                         return (
                             <p key={data.timestamp}>
-                            {data.username + " : "}{messageMedia(data)}
+                            <BasicCard admin={admin} username={data.username} media={messageMedia(data)}/>
                             </p> 
                         );      
                     } 
@@ -172,7 +175,9 @@ function App(){
                 <form>
                     <label>Enter Message </label><br/>
                     <input type="text"  onChange={updateInputField}/>
+                    {/* <ComposedTextField/> */}
                     <button type='submit' onClick={sendMessage}>Send Message</button>
+                    {/* <BasicButtons text="Send Message"/> */}
                 </form>
                 <input type="file" id="upload-File" onChange={onFileSelected} />
                 {
