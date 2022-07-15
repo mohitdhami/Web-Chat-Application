@@ -163,7 +163,6 @@ function App(){
             </div>
 
             <div className="chats__section">
-                <br/><br/><br/><br/><br/>
             { //Embedding JSX by map() Function  Inside JSX Code Block 
                 chats.map(
                     (data) =>{
@@ -186,7 +185,7 @@ function App(){
                     <input type="text"  onChange={updateInputField}/>
                     
                     <button type='submit' onClick={sendMessage}>Send</button>
-                    <input type="file" id="upload-File" onChange={onFileSelected} />
+                    <input type="file" id="upload-File" onChange={onFileSelected}/>
                     </Stack>      
                 </form>
             </div>

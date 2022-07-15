@@ -2,20 +2,26 @@
     --chatBox-width: 50%; 
     --cb-paddingleft: 0%;
     --chatbox-borderRadius: 10px;
+    --chatsec-alignment : center;
 }
 
 @media screen and (max-width: 1000px) {
     :root {
         --chatBox-width: 100%;
-        --cb-paddingleft: 5%;
+        --cb-paddingleft: 10%;
         --chatbox-borderRadius: 0px;
+    }
+}
+@media screen and (max-width: 600px) {
+    :root {
+        --chatsec-alignment : left;
     }
 }
 
 .chat-box{
     padding-bottom: 1%;
-    padding-left: 1%;
-    display: flex; 
+    padding-left: var(--cb-paddingleft);
+    display: grid; 
     align-items: center; 
     justify-content: center;
     position: fixed;
@@ -51,9 +57,10 @@ body{
 }
 
 .chats__section{
-    width: 100%;
+    width: 95%;
     display: grid;
-    justify-content: center;
+    padding-top: 15vh;
+    justify-content: var(--chatsec-alignment);
     margin-bottom: 15vh;
 }
 

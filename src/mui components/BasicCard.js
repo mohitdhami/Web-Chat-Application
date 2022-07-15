@@ -9,17 +9,19 @@ export default function BasicCard({admin, username, media}) {
   const isUserAdmin = admin === username;
 
   const adminCard = {
-    minWidth: '250px',
+    maxWidth: '400px',
+    maxHeight: '150px',
     backgroundColor: '#377D71',
     color: 'rgb(244, 239, 239)',
-    marginLeft: '10vh',
-    marginRight: '1%'
+    marginLeft: '20vh',
+    marginRight: '1%',
   };
   const userCard = {
-    minWidth: '250px',
+    maxWidth: '400px',
+    maxHeight: '150px',
     backgroundColor: 'rgb(244, 239, 239)',
     color: 'black',
-    marginRight: '10vh',
+    marginRight: '20vh',
     marginLeft: '1%',
   };
 
