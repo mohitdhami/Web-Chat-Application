@@ -1,16 +1,20 @@
 :root {
     --chatBox-width: 50%; 
+    --cb-paddingleft: 0%;
+    --chatbox-borderRadius: 10px;
 }
 
-@media only screen and (max-width: 1000px) {
+@media screen and (max-width: 1000px) {
     :root {
-        --chatBox-width: 95%;
+        --chatBox-width: 100%;
+        --cb-paddingleft: 5%;
+        --chatbox-borderRadius: 0px;
     }
 }
 
-
 .chat-box{
     padding-bottom: 1%;
+    padding-left: 1%;
     display: flex; 
     align-items: center; 
     justify-content: center;
@@ -20,8 +24,9 @@
     color: black;
     width: var(--chatBox-width);
     margin-left: calc((100% - var(--chatBox-width))/2);
+    margin-right: calc((100% - var(--chatBox-width))/2);
     margin-bottom: 1%;
-    border-radius: 10px;
+    border-radius: var(--chatbox-borderRadius);
     font-size: 14px;
 }
 

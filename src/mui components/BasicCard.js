@@ -12,18 +12,19 @@ export default function BasicCard({admin, username, media}) {
     minWidth: '250px',
     backgroundColor: '#377D71',
     color: 'rgb(244, 239, 239)',
-    marginLeft: '30vh',
+    marginLeft: '10vh',
     marginRight: '1%'
   };
   const userCard = {
     minWidth: '250px',
     backgroundColor: 'rgb(244, 239, 239)',
     color: 'black',
-    marginRight: '30vh',
+    marginRight: '10vh',
+    marginLeft: '1%',
   };
 
   return (
-    <Card sx={isUserAdmin? adminCard : userCard}>
+    <Card sx={isUserAdmin? adminCard : userCard} >
       <CardContent>
         <Typography sx={{ fontSize: 14 , color: isUserAdmin? 'yellow': 'blueviolet'}} gutterBottom>
           {username}

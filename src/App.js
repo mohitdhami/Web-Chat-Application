@@ -187,10 +187,6 @@ function App(){
                     
                     <button type='submit' onClick={sendMessage}>Send</button>
                     <input type="file" id="upload-File" onChange={onFileSelected} />
-                    {
-                        (fileuploadprogress > 0 && fileuploadprogress !== 100) ?
-                        <p>Uploading ..</p>: null
-                    } 
                     </Stack>      
                 </form>
             </div>
