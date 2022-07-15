@@ -25,7 +25,7 @@ export default function BasicCard({admin, username, media}) {
   return (
     <Card sx={isUserAdmin? adminCard : userCard}>
       <CardContent>
-        <Typography sx={{ fontSize: 14 , color: isUserAdmin? 'orange': 'blueviolet'}} gutterBottom>
+        <Typography sx={{ fontSize: 14 , color: isUserAdmin? 'yellow': 'blueviolet'}} gutterBottom>
           {username}
         </Typography>
         <Typography variant="body2">
