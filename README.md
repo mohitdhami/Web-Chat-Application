@@ -10,8 +10,8 @@
 
 ## Application UI and Screenshots <br/>
 <p align="center">
-  <h2>#1 App Interface ( Single User Perspective )</h2>
+  <h2>###1 App Interface ( Single User Perspective )</h2>
   <img src="/Screenshots/App Showcase GIF 1.gif">
-  </br><h2>#2 App Interface ( Dual User Perspective )</h2>
+  </br><h2>###2 App Interface ( Dual User Perspective )</h2>
   <img src="/Screenshots/App Showcase GIF 2.gif">
 </p>
