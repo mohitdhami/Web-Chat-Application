@@ -28,14 +28,13 @@ function App(){
         updateAdmin(username);
     },[]);
 
-    //Fetching Realtime data from collection messages hosted at Firebase Firestore
+        //Fetching Realtime data from collection messages hosted at Firebase Firestore
         useEffect(()=>{
             const q = query(collection(db, "messages"), orderBy("timestamp", "asc"));
             onSnapshot(q, (querySnapshot) => {
                 let temp = [];
                 querySnapshot.forEach((doc) => {
-                    temp.push(doc.data())
-                    updateChats(temp)
+                    temp.push(doc.data());
                     updateChats(temp);
                 });
             });
@@ -186,6 +185,10 @@ function App(){
                     
                     <button type='submit' onClick={sendMessage}>Send</button>
                     <input type="file" id="upload-File" onChange={onFileSelected}/>
+                    {
+                        (fileuploadprogress > 0 && fileuploadprogress != 100)?
+                        <p>{fileuploadprogress}%</p>:null
+                    }
                     </Stack>      
                 </form>
             </div>
