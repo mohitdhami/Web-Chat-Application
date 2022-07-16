@@ -1,5 +1,9 @@
 ## Web Chat Application
 
-### Connect to Chat Room : Link Not Available Yet
+### Connect to Chat Room : [Web Chat Application](https://helpful-crumble-0375fc.netlify.app/)
 
-### The Chat Application is here to Offer you Chat Features which you can Enjoy without Signing up, In Addition You can also Share Images, Voice Recordings, Music, Documents and anything you can Think
+### Features of Group Chat Web Application -
+#### Real-Time Chat: Chats done in this App are real-time and Requires Decent Internet Connection.
+#### File Sharing: We can Share any Type of File (Images, GIFs, Audio, Video, Documents etc ) in this Application.
+#### No Installation: We can use this App without installing any additional Software, Just a latest browser is sufficient to use this application.
+#### No Login: We can start chatting without signing up or Logging to any Account which Protects your Identity and makes you Anonymous.
