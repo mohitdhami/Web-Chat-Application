@@ -6,8 +6,8 @@
 - Real-Time Chat: Chats done in this App are real-time and Requires Decent Internet Connection.
 - File Sharing: We can Share any Type of File (Images, GIFs, Audio, Video, Documents etc ) in this Application.
 - No Installation: We can use this App without installing any additional Software, Just a latest browser is sufficient to use this application.
-- No Login: We can start chatting without signing up or Logging to any Account which Protects your Identity and makes you Anonymous.
-<br/>
+- No Login: We can start chatting without signing up or Logging to any Account which Protects your Identity and makes you Anonymous.<br/>
+
 ### Application UI and Screenshots <br/>
 <p align="center">
   <h2>#1 App Interface ( Single User Perspective )</h2>
